@@ -1,33 +1,13 @@
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-import Button from 'react-bootstrap/Button';
-
-interface TranslateState {
-  fromLaguage : string,
-  toLanguage : string,
-  fromText? : string,
-  result? : string ,
-  loading : boolean
-}
-
-const initialState = {
-  fromLaguage : "auto",
-  toLanguage : "en",
-  fromText : "",
-  result : "",
-  loading : false
-}
-
-const reducer = ( state : TranslateState  ) => {
-
-}
-
+import Button from 'react-bootstrap/Button'
 
 function App () {
   return (<div>
     <Button variant='danger'>Intercambiar</Button>
-    <h1>Google Translate</h1>
+    <h1>Google Translates</h1>
+    <button > Cambiar a Español</button>
   </div>)
 }
 
