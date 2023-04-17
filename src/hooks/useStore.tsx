@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { type TranslateActions, type TranslateState } from '../type'
+import { type Language, type FromLanguage, type TranslateActions, type TranslateState } from '../type'
 
 const initialState: TranslateState = {
   fromLanguage : 'auto',
@@ -13,20 +13,23 @@ const initialState: TranslateState = {
 const reducer = (state: TranslateState, action: TranslateActions) => {
   const { type } = action
   if (type === 'EXCHANGE_LANGUAGES') {
-    const { fromLanguage, fromText } = state
+    const { fromLanguage, toLanguage } = state
+    if (fromLanguage === 'auto') return state
     return {
       ...state,
-      fromLanguage : fromText,
-      fromText : fromLanguage
+      fromLanguage : toLanguage,
+      toLanguage : fromLanguage
     }
   }
   if (type === 'SET_FROM_LANGUAGE') {
+    if (state.toLanguage === action.payload) return state
     return {
       ...state,
       fromLanguage : action.payload
     }
   }
   if (type === 'SET_TO_LANGUAGE') {
+    if (state.fromLanguage === action.payload) return state
     return {
       ...state,
       toLanguage : action.payload
@@ -63,12 +66,29 @@ export function useStore () {
     dispatch({ type:'EXCHANGE_LANGUAGES' })
   }
 
+  const setFromLanguage = (payload: FromLanguage) => {
+    dispatch({ type:'SET_FROM_LANGUAGE', payload })
+  }
+  const setToLanguage = (payload: Language) => {
+    dispatch({ type:'SET_TO_LANGUAGE', payload })
+  }
+  const setFromText = (payload: string) => {
+    dispatch({ type:'SET_FROM_TEXT', payload })
+  }
+  const setResult = (payload: string) => {
+    dispatch({ type:'SET_RESULT', payload })
+  }
+
   return {
     fromLanguage,
     toLanguage,
     fromText,
     result,
     loading,
-    exchangeLanguages
+    exchangeLanguages,
+    setFromLanguage,
+    setToLanguage,
+    setFromText,
+    setResult
   }
 }
