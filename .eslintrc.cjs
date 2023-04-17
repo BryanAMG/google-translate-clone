@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/key-spacing': 'off'
+    '@typescript-eslint/key-spacing': 'off',
+    '@typescript-eslint/space-before-function-paren': 'off'
   }
 }
