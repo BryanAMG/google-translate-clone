@@ -3,7 +3,7 @@ import { type Language, type FromLanguage, type TranslateActions, type Translate
 import { AUTO_LANGUAGE } from '../constans'
 
 const initialState: TranslateState = {
-  fromLanguage : 'auto',
+  fromLanguage : 'es',
   toLanguage : 'en',
   fromText : '',
   result : '',
@@ -14,12 +14,14 @@ const initialState: TranslateState = {
 const reducer = (state: TranslateState, action: TranslateActions) => {
   const { type } = action
   if (type === 'EXCHANGE_LANGUAGES') {
-    const { fromLanguage, toLanguage } = state
+    const { fromLanguage, toLanguage, fromText, result } = state
     if (fromLanguage === AUTO_LANGUAGE) return state
     return {
       ...state,
       fromLanguage : toLanguage,
-      toLanguage : fromLanguage
+      toLanguage : fromLanguage,
+      fromText : result,
+      result : fromText
     }
   }
   if (type === 'SET_FROM_LANGUAGE') {
@@ -31,16 +33,21 @@ const reducer = (state: TranslateState, action: TranslateActions) => {
   }
   if (type === 'SET_TO_LANGUAGE') {
     if (state.fromLanguage === action.payload) return state
+    const loading = state.fromText !== ''
     return {
       ...state,
-      toLanguage : action.payload
+      toLanguage : action.payload,
+      result : '',
+      loading
     }
   }
   if (type === 'SET_FROM_TEXT') {
+    const loading = action.payload !== ''
     return {
       ...state,
-      loading : true,
-      fromText : action.payload
+      loading,
+      fromText : action.payload,
+      result : ''
     }
   }
   if (type === 'SET_RESULT') {
