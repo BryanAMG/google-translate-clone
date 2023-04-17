@@ -21,12 +21,7 @@ export const TextArea = ({ type, loading, value, onChange }: Props) => {
     : commonStyles
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (type === 'from') {
-      onChange(e.target.value)
-    }
-    if (loading === true) {
-      onChange('cambiando pe')
-    }
+    onChange(e.target.value)
   }
 
   return (
@@ -37,6 +32,7 @@ export const TextArea = ({ type, loading, value, onChange }: Props) => {
       onChange = {handleChange}
       style={styles}
       value={value}
+      disabled={type === 'to'}
     />
   )
 }
