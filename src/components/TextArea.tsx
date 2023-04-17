@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
-
+import './textArea.css'
 interface Props {
   type: string
   loading?: boolean
@@ -8,7 +8,7 @@ interface Props {
   value: string
 }
 
-const commonStyles = { border : 0, height:'200px', resize:'none' }
+const commonStyles = { border : 0, height:'200px' }
 const getPlaceHolder = ({ type, loading }: { type: string, loading?: boolean }) => {
   if (type === 'from') return 'Introducir Texto'
   if (loading === true) return 'Cargando...'
