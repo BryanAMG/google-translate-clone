@@ -3,7 +3,7 @@ import { type Language, type FromLanguage, type TranslateActions, type Translate
 import { AUTO_LANGUAGE } from '../constans'
 
 const initialState: TranslateState = {
-  fromLanguage : 'es',
+  fromLanguage : 'auto',
   toLanguage : 'en',
   fromText : '',
   result : '',
